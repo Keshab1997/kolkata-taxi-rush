@@ -3,10 +3,16 @@ import 'dart:math';
 enum RoadItemKind { traffic, coin, passenger }
 
 class RoadItem {
-  RoadItem({required this.lane, required this.kind, this.progress = 0});
+  RoadItem({
+    required this.lane,
+    required this.kind,
+    this.progress = 0,
+    this.variant = 0,
+  });
 
   final int lane;
   final RoadItemKind kind;
+  final int variant;
   double progress;
 }
 
@@ -85,6 +91,14 @@ class KolkataRun {
         : roll < 0.86
         ? RoadItemKind.coin
         : RoadItemKind.passenger;
-    items.add(RoadItem(lane: _random.nextInt(3), kind: kind, progress: 0));
+    final variant = kind == RoadItemKind.traffic ? _random.nextInt(3) : 0;
+    items.add(
+      RoadItem(
+        lane: _random.nextInt(3),
+        kind: kind,
+        progress: 0,
+        variant: variant,
+      ),
+    );
   }
 }

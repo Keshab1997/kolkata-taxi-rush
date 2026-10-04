@@ -23,4 +23,4 @@
 ## Project notes
 
 - Keep the demo asset-free and light: the road, cars, skyline, and pickups are drawn with Flutter Canvas.
-- The game is a stylized 2D/2.5D lane runner, not a full 3D simulation.
+- Keep the city in a lightweight, software-projected low-poly 3D style; avoid adding a heavy engine or large asset bundles without Keshab's approval.

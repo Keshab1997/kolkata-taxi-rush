@@ -234,7 +234,7 @@ class _KolkataTaxiGameState extends State<KolkataTaxiGame>
                   ],
                 ),
               ),
-              _badge('PLAYABLE DEMO'),
+              _badge('3D CITY DEMO'),
             ],
           ),
           const SizedBox(height: 42),
