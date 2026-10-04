@@ -1,0 +1,36 @@
+name: Flutter Web Preview
+
+# Manual preview build, plus cleanup when a branch is deleted.
+# Before the first deploy, configure Settings -> Pages -> Deploy from a branch,
+# using gh-pages (root). The generated site is public when Pages is enabled,
+# even though this source repository is private.
+on:
+  workflow_dispatch:
+  delete:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Preview deploys and cleanup both update the same gh-pages branch; serialize them.
+concurrency:
+  group: web-preview
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    if: github.event_name != 'delete'
+    uses: Keshab1997/flutter-builder/.github/workflows/web-preview.yml@v1.14.1
+    with:
+      flutter-channel: stable
+      comment-on-pr: false
+      set-about-link: false
+    secrets: inherit
+
+  cleanup:
+    if: github.event_name == 'delete' && github.event.ref_type == 'branch'
+    uses: Keshab1997/flutter-builder/.github/workflows/preview-cleanup.yml@v1.14.1
+    with:
+      branch-name: ${{ github.event.ref }}
+    permissions:
+      contents: write
